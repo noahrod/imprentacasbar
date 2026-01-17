@@ -114,7 +114,7 @@ async function sendEmailViaMailgun(name, email, phone, message, env) {
           <!-- Header with logo and brand color -->
           <tr>
             <td style="background: linear-gradient(135deg, #18BC9C 0%, #2C3E50 100%); padding: 40px 30px; text-align: center;">
-              <img src="https://imprentacasbar.com/logo-w.svg" alt="Imprenta CASBAR" style="height: 60px; margin-bottom: 15px;">
+              <img src="https://imprentacasbar.com/logo.png" alt="Imprenta CASBAR" style="height: 60px; margin-bottom: 15px;">
               <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Imprenta CASBAR</h1>
               <p style="color: #ECF0F1; margin: 10px 0 0 0; font-size: 16px;">¡Le damos la mejor impresión a tu negocio!</p>
             </td>

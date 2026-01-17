@@ -88,13 +88,13 @@ After deploying, you need to add your API keys as **secrets**:
 
    **RECIPIENT_EMAILS**
    - Type: Secret (encrypted)
-   - Value: `litograficacasbar@gmail.com,noerodriguez@outlook.com`
+   - Value: `example1@gmail.com,example2@gmail.com`
    - (Multiple emails separated by commas)
 
    **RECAPTCHA_SECRET_KEY**
    - Type: Secret (encrypted)
    - Get from: [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin)
-   - Find your site with key `6LdjMSwUAAAAAB9gWaLs7gw6OB7E5zNd4WakDr6D`
+   - Find your site with key 
    - Copy the **Secret Key** (NOT the Site Key)
 
 4. **Click "Save and Deploy"** after adding all 4 secrets
@@ -113,7 +113,7 @@ var workerURL = "YOUR_CLOUDFLARE_WORKER_URL_HERE";
 Replace `YOUR_CLOUDFLARE_WORKER_URL_HERE` with your actual Worker URL from Step 2, example:
 
 ```javascript
-var workerURL = "https://imprenta-casbar-contact.YOUR-SUBDOMAIN.workers.dev";
+var workerURL = "https://WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
 ```
 
 **Save the file** and commit your changes.
@@ -123,7 +123,7 @@ var workerURL = "https://imprenta-casbar-contact.YOUR-SUBDOMAIN.workers.dev";
 ## Step 5: Update reCAPTCHA Domains
 
 1. Go to [Google reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin)
-2. Find your site (with key `6LdjMSwUAAAAAB9gWaLs7gw6OB7E5zNd4WakDr6D`)
+2. Find your site 
 3. Under **Domains**, make sure you have:
    - Your GitHub Pages domain (e.g., `username.github.io`)
    - Any custom domain if you're using one
