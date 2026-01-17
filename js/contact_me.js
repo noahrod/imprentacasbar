@@ -36,8 +36,7 @@ $(function() {
       $this = $("#sendMessageButton");
       $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
       
-      // TODO: Replace this URL with your Cloudflare Worker URL after deployment
-      // Format: https://imprenta-casbar-contact.YOUR-SUBDOMAIN.workers.dev
+      // Cloudflare Worker endpoint for secure email sending
       var workerURL = "https://morning-fire-34f9.ingnoerodriguezc.workers.dev";
       
       $.ajax({
