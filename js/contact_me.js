@@ -7,6 +7,22 @@ $(function() {
     },
     submitSuccess: function($form, event) {
       event.preventDefault(); // prevent default submit behaviour
+      
+      // Get reCAPTCHA response
+      var recaptchaResponse = grecaptcha.getResponse();
+      
+      // Check if reCAPTCHA is completed
+      if (!recaptchaResponse) {
+        $('#success').html("<div class='alert alert-warning'>");
+        $('#success > .alert-warning').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+          .append("</button>");
+        $('#success > .alert-warning')
+          .append("<strong>Por favor completa la verificación reCAPTCHA.</strong>");
+        $('#success > .alert-warning')
+          .append('</div>');
+        return;
+      }
+      
       // get values from FORM
       var name = $("input#name").val();
       var email = $("input#email").val();
@@ -19,37 +35,50 @@ $(function() {
       }
       $this = $("#sendMessageButton");
       $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
+      
+      // TODO: Replace this URL with your Cloudflare Worker URL after deployment
+      // Format: https://imprenta-casbar-contact.YOUR-SUBDOMAIN.workers.dev
+      var workerURL = "https://morning-fire-34f9.ingnoerodriguezc.workers.dev";
+      
       $.ajax({
-        url: "././mail/contact_me.php",
+        url: workerURL,
         type: "POST",
-        data: {
+        contentType: "application/json",
+        data: JSON.stringify({
           name: name,
           phone: phone,
           email: email,
-          message: message
-        },
+          message: message,
+          recaptchaResponse: recaptchaResponse
+        }),
         cache: false,
-        success: function() {
+        success: function(response) {
           // Success message
           $('#success').html("<div class='alert alert-success'>");
           $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
             .append("</button>");
           $('#success > .alert-success')
-            .append("<strong>Your message has been sent. </strong>");
+            .append("<strong>¡Tu mensaje ha sido enviado! Gracias por contactarnos.</strong>");
           $('#success > .alert-success')
             .append('</div>');
           //clear all fields
           $('#contactForm').trigger("reset");
+          // Reset reCAPTCHA
+          grecaptcha.reset();
         },
-        error: function() {
+        error: function(xhr) {
           // Fail message
+          var errorMsg = "Lo sentimos, parece que nuestro servidor no está respondiendo. Por favor intenta nuevamente más tarde.";
+          if (xhr.responseJSON && xhr.responseJSON.error) {
+            errorMsg = xhr.responseJSON.error;
+          }
           $('#success').html("<div class='alert alert-danger'>");
           $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
             .append("</button>");
-          $('#success > .alert-danger').append($("<strong>").text("Sorry " + firstName + ", it seems that my mail server is not responding. Please try again later!"));
+          $('#success > .alert-danger').append($("<strong>").text("Lo sentimos " + firstName + ", " + errorMsg));
           $('#success > .alert-danger').append('</div>');
-          //clear all fields
-          $('#contactForm').trigger("reset");
+          // Reset reCAPTCHA on error
+          grecaptcha.reset();
         },
         complete: function() {
           setTimeout(function() {

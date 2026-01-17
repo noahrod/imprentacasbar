@@ -1,0 +1,9 @@
+name = "imprenta-casbar-contact"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Environment variables (set these in Cloudflare Dashboard)
+# MAILGUN_API_KEY = "your-mailgun-api-key"
+# MAILGUN_DOMAIN = "your-domain.com"
+# RECIPIENT_EMAILS = "litograficacasbar@gmail.com,noerodriguez@outlook.com"
+# RECAPTCHA_SECRET_KEY = "your-recaptcha-secret-key"

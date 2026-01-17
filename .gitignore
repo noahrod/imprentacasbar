@@ -1,0 +1,19 @@
+# Environment variables (contains sensitive API keys)
+.env
+.env.local
+
+# Node modules (if you add any dependencies)
+node_modules/
+
+# Netlify build output
+.netlify/
+
+# MacOS files
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
